@@ -23,8 +23,8 @@ use app\models\User;
 	<?php endif; ?>
 
 	<?php if($user->role <= User::ROLE_TEACHER): ?>
-		<?= Html::a('<i class="glyphicon glyphicon-education"></i> My Advisory', ['/students/index']) ?>
-		<?= Html::a('<i class="glyphicon glyphicon-blackboard"></i> My Classes', ['/students/index']) ?>
+		<?= Html::a('<i class="glyphicon glyphicon-education"></i> My Advisory', ['/teachers/advisory']) ?>
+		<?= Html::a('<i class="glyphicon glyphicon-blackboard"></i> My Classes', ['/teachers/classes']) ?>
 		
 	<?php endif; ?>
 </div>

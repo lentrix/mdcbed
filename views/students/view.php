@@ -56,7 +56,7 @@ Modal::end();
                         </tr>
                         <tr>
                             <th>Adviser</th>
-                            <td><?= $model->currentEnrol->section->teacher->fullName ?></td>
+                            <td><?= $model->currentEnrol->section->teacher?$model->currentEnrol->section->teacher->fullName:'' ?></td>
                         </tr>
                     </table>
 
@@ -117,6 +117,23 @@ Modal::end();
                 <h3>Enrolment History</h3>
                 <?php if(count($model->enrols)>0) : ?>
 
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Period</th>
+                        <th>Level</th>
+                        <th>Section</th>
+                        <th>Date Enrolled</th>
+                    </tr>
+                    <?php foreach($model->enrols as $enrol): ?>
+                    <tr>
+                        <td><?= $enrol->period->longName ?></td>
+                        <td><?= $enrol->level->longName ?></td>
+                        <td><?= $enrol->section->name ?></td>
+                        <td><?= date('M d, Y', strtotime($enrol->dateEnrolled)) ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
+                    
                 <?php else: ?>
                     <p>No enrolment history.</p>
                 <?php endif; ?>

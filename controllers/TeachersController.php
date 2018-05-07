@@ -33,10 +33,10 @@ class TeachersController extends Controller
                 'ruleConfig' => [
                     'class' => AccessRule::className(),
                 ],
-                'only' => ['index','create', 'update', 'view', 'upload'],
+                'only' => ['index','create', 'update', 'view', 'upload','advisory','classes'],
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'upload'],
+                        'actions' => ['index', 'view', 'upload','advisory','classes'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -147,6 +147,17 @@ class TeachersController extends Controller
         Yii::$app->session->setFlash('info',"The teacher $model->fullName has been " . ($model->active?'Activated':'Deactivated'));
 
         return $this->redirect(['view','id'=>$id]);
+    }
+
+    public function actionAdvisory()
+    {
+        $advisory = Yii::$app->user->identity->teacher->advisory;
+        return $this->render('advisory',compact('advisory'));
+    }
+
+    public function actionClasses()
+    {
+
     }
 
     /**

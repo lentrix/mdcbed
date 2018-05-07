@@ -138,6 +138,11 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         $this->save();
     }
 
+    public function getTeacher()
+    {
+        return $this->hasOne(Teacher::className(), ['userId'=>'id']);
+    }
+
     public function getRoleString()
     {
         switch($this->role)

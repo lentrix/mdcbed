@@ -96,4 +96,12 @@ class Teacher extends \yii\db\ActiveRecord
     {
         return "$this->lastName, $this->firstName";
     }
+
+    public function getAdvisory()
+    {
+        return Section::find()->joinWith('period')
+            ->where(['teacherId'=>$this->id])
+            ->andWhere(['period.active'=>1])
+            ->one();
+    }
 }

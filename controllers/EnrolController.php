@@ -7,9 +7,40 @@ use app\models\Student;
 use app\models\Enrol;
 use app\models\Section;
 use app\models\EnrolForm;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use app\components\AccessRule;
+use app\models\User;
 
 class EnrolController extends \yii\web\Controller
 {
+
+    public function behaviors()
+    {
+        return [
+            'access'=>[
+                'class' => AccessControl::className(),
+                'ruleConfig' => [
+                    'class' => AccessRule::className()
+                ],
+                'only' => ['enrol','transfer','withdraw','promote'],
+                'rules' => [
+                    [
+                        'actions' => ['enrol','transfer','withdraw','promote'],
+                        'allow' => true,
+                        'roles' => [User::ROLE_ADMIN, User::ROLE_HEAD]
+                    ],
+                ]
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    //'delete' => ['POST'],
+                ],
+            ],
+        ];
+    }
+
     public function actionEnrol()
     {
         $model = new EnrolForm;
