@@ -104,4 +104,12 @@ class Teacher extends \yii\db\ActiveRecord
             ->andWhere(['period.active'=>1])
             ->one();
     }
+
+    public function getCurrentClasses()
+    {
+        return Classes::find()->joinWith('period')
+            ->where(['classes.teacherId'=>$this->id])
+            ->andWhere(['period.active'=>1])
+            ->all();
+    }
 }

@@ -155,9 +155,15 @@ class TeachersController extends Controller
         return $this->render('advisory',compact('advisory'));
     }
 
+    /**
+     * Shows the class schedule of the teacher account
+     * of the logged user.
+     */
     public function actionClasses()
     {
+        $teacher = Yii::$app->user->identity->teacher;
 
+        return $this->render('classes', compact('teacher'));
     }
 
     /**
