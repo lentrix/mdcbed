@@ -2,7 +2,7 @@
     {
         "route" : "/sections/index",
         "status" : "ideation",
-        "issue" : "Sections index page must have a button to duplicate all the sections from another school year but will only appear if there are no sections in the active school year.",
+        "issue" : "Sections index page must have a button to duplicate all the sections from another school year but will only appear if there are no sections in the active school year."
     },
     {
         "route" : "/students/view",
