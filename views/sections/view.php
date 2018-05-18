@@ -5,6 +5,7 @@ use yii\widgets\DetailView;
 use app\components\ModalConfirmation;
 use yii\bootstrap\Modal;
 use app\models\User;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Section */
@@ -82,6 +83,22 @@ $this->registerJS($js);
             
             <div class="tab-pane fade <?= $activeTab=='students' ? 'active in' : '' ?>" id="students">
                 <h3>Learners</h3>
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <th>LRN</th>
+                        <th>Last Name</th>
+                        <th>First Name</th>
+                        <th>Middle Name</th>
+                    </tr>
+                    <?php foreach($model->studentEnrols as $enrol): ?>
+                    <tr class="clickable" value="<?= Url::toRoute(['/students/view','id'=>$enrol->student->id]);?>">
+                        <td><?= $enrol->student->lrn ?></td>
+                        <td><?= $enrol->student->lastName ?></td>
+                        <td><?= $enrol->student->firstName ?></td>
+                        <td><?= $enrol->student->middleName ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
             </div>
 
             <div class="tab-pane fade <?= $activeTab=='schedule'?'active in':'' ?>" id="schedule">

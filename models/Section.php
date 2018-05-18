@@ -109,7 +109,11 @@ class Section extends \yii\db\ActiveRecord
     }
 
     public function getClasses(){
-        return Classes::find()
-            ->where(['sectionId'=>$this->id])->all();
+        return $this->hasMany(Classes::className(), ['sectionId'=>'id']);
+    }
+
+    public function getStudentEnrols()
+    {
+        return Enrol::find()->joinWith('student')->where(['sectionId'=>$this->id])->all();
     }
 }
