@@ -47,8 +47,10 @@ Modal::begin([
     <p class="pull-right">
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <button class="btn btn-info" data-toggle="modal" data-target="#modal-change-phase">Change Phase</button>
-        <?= Html::button('Activate', ['class'=>'btn btn-success', 
-            'data-toggle'=>'modal', 'data-target'=>'#modal-confirm']); ?>
+        <?php if(!$model->active): ?>
+            <?= Html::button('Activate', ['class'=>'btn btn-success', 
+                'data-toggle'=>'modal', 'data-target'=>'#modal-confirm']); ?>
+        <?php endif; ?>
     </p>
 <?php endif; ?>
 
