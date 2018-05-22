@@ -36,7 +36,7 @@ class Section extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'levelId'], 'required'],
+            [['name', 'levelId','periodId'], 'required'],
             [['levelId', 'teacherId', 'periodId','homeRoom', 'departmentId'], 'integer'],
             [['name'], 'string', 'max' => 200],
             [['levelId'], 'exist', 'skipOnError' => true, 'targetClass' => Level::className(), 'targetAttribute' => ['levelId' => 'id']],
