@@ -82,4 +82,20 @@ ModalConfirmation::confirm(
 <hr>
 <div>
     <h2>Class Schedule</h2>
+    <table class="table table-striped table-condensed table-hover">
+        <tr>
+            <th>Time</th>
+            <th>Subject</th>
+            <th>Venue</th>
+        </tr>
+
+        <?php foreach($model->currentClasses as $class): ?>
+        <tr class="clickable" value="<?= Url::toRoute(['/classes/view', 'id'=>$class->id]) ?>">
+            <td><?= $class->start ?> - <?= $class->end ?> <?= $class->day ?></td>
+            <td><?= $class->subject ?></td>
+            <td><?= $class->venue->name ?></td>
+        </tr>
+        <?php endforeach; ?>
+
+    </table>
 </div>
