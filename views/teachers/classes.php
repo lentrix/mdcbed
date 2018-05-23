@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php if($teacher === null): ?>
 
     <div class="alert alert-warning">
-        <i class="glyphicon glyphicon-remove"></i> You do not have a teacher account.
+        <span class="large-text"><i class="glyphicon glyphicon-ban-circle"></i> You do not have a teacher account.</span> 
     </div>
 
 <?php else: ?>

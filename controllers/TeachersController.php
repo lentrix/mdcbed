@@ -151,8 +151,7 @@ class TeachersController extends Controller
 
     public function actionAdvisory()
     {
-        $advisory = Yii::$app->user->identity->teacher->advisory;
-        return $this->render('advisory',compact('advisory'));
+        return $this->render('advisory');
     }
 
     /**

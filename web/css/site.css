@@ -194,3 +194,7 @@ a.desc:after {
     background-color: #fff;
     min-height: 100vh;
 }
+
+.large-text {
+    font-size: 1.3em;
+}

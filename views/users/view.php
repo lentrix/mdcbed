@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\bootstrap\Modal;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
@@ -19,7 +20,7 @@ Modal::begin([
     'size' => Modal::SIZE_LARGE
 ]);
 
-echo $this->render('/_cropper', ['action'=>'/users/upload','id'=>$model->id]);
+echo $this->render('/_cropper', ['action'=>Url::toRoute(['/users/upload']),'id'=>$model->id]);
 
 Modal::end();
 ?>

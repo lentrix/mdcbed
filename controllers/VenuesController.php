@@ -37,7 +37,7 @@ class VenuesController extends Controller
                     [
                         'actions' => ['index', 'create', 'update', 'delete'],
                         'allow' => true,
-                        'roles' => [User::ROLE_ADMIN, User::ROLE_HEAD]
+                        'roles' => [User::ROLE_ADMIN, User::ROLE_HEAD, User::ROLE_STAFF]
                     ],
                 ],
 
