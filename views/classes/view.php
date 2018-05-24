@@ -3,7 +3,11 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\DetailView;
+<<<<<<< HEAD
 use app\models\User;
+=======
+use app\components\TimeCheck;
+>>>>>>> 4ef020552884ba3d5832272658d922ead664474a
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Classes */

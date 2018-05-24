@@ -195,10 +195,15 @@ a.desc:after {
     min-height: 100vh;
 }
 
+<<<<<<< HEAD
 .large-text {
     font-size: 1.3em;
 }
 
 .highlight-row {
     background-color: lightskyblue;
+=======
+.highlight-row {
+    background-color: powderblue !important;
+>>>>>>> 4ef020552884ba3d5832272658d922ead664474a
 }

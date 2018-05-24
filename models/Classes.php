@@ -11,6 +11,7 @@ use Yii;
  * @property string $subject
  * @property string $start
  * @property string $end
+ * @property string $day
  * @property int $sectionId
  * @property int $venueId
  * @property int $teacherId
