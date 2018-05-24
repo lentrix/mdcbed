@@ -1,5 +1,6 @@
 <?php
 use app\models\Period;
+use app\components\TimeCheck;
 
 if($model->currentEnrol->period->phase > Period::PHASE_ENROLMENT){
     $classes = $model->currentEnrol->classes;
@@ -17,7 +18,8 @@ if($model->currentEnrol->period->phase > Period::PHASE_ENROLMENT){
     </thead>
     <tbody>
         <?php foreach($classes as $cls): ?>
-            <tr>
+            <?php date_default_timezone_set("Asia/Manila"); ?>
+            <tr <?= TimeCheck::classIsOnGoing($cls, (new DateTime("now"))->getTimeStamp()) ? 'class="highlight-row"' : '' ?>>
                 <td><?= $cls->subject ?></td>
                 <td>
                     <?= $cls->start ?> - <?= $cls->end ?> <?= $cls->day ?>

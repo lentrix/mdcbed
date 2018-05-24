@@ -198,3 +198,7 @@ a.desc:after {
 .large-text {
     font-size: 1.3em;
 }
+
+.highlight-row {
+    background-color: lightskyblue;
+}

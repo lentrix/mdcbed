@@ -129,18 +129,23 @@ class Classes extends \yii\db\ActiveRecord
                 $tempId = $this->id ? $this->id : -1;
                 $exStart = $this->adjustTime($this->start,'+1 minutes');
                 $exEnd = $this->adjustTime($this->end, '-1 minutes');
-                $conflict = Classes::find()->joinWith('period')
+                $command = Classes::find()->joinWith('period')
                 ->where(['OR', ['between', 'classes.start', $this->start, $exEnd],
                     ['between', 'classes.end', $exStart, $this->end]])
                 ->andFilterWhere(['venueId'=>$this->venueId])
                 ->andFilterWhere(['like', 'day', $day])
                 ->andFilterWhere(['not', 'classes.id=' . $tempId])
-                ->andFilterWhere(['period.active'=>1])
-                ->one();
+                ->andFilterWhere(['period.active'=>1]);
+
+                $sql = $command->createCommand()->getRawSql();
+
+                $conflict = $command->one();
 
                 if ($conflict) {
                     $this->addError($attribute, 'This schedule is in conflict with ' 
                         . $conflict->subject . ' ' . $conflict->schedule);
+                    echo $sql;
+                    die();
                 }
             }
         }
@@ -149,6 +154,6 @@ class Classes extends \yii\db\ActiveRecord
     private function adjustTime($time, $adjustment){
         $date = strtotime($time);
         $excl = strtotime($adjustment, $date);
-        return date('g:i', $excl);
+        return date('H:i', $excl);
     }
 }

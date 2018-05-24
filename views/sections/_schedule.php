@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Url;
 use yii\helpers\Html;
+use app\components\TimeCheck;
 
 ?>
 
@@ -13,7 +14,8 @@ use yii\helpers\Html;
     </thead>
     <tbody>
         <?php foreach($model->classes as $cls): ?>
-            <tr>
+            <?php date_default_timezone_set("Asia/Manila"); ?>
+            <tr <?= TimeCheck::classIsOnGoing($cls, (new DateTime("now"))->getTimeStamp()) ? 'class="highlight-row"' : '' ?>>
                 <td><?= $cls->subject ?></td>
                 <td>
                     <?= $cls->start ?> - <?= $cls->end ?> <?= $cls->day ?>

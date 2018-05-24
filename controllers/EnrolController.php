@@ -28,7 +28,7 @@ class EnrolController extends \yii\web\Controller
                     [
                         'actions' => ['enrol','transfer','withdraw','promote'],
                         'allow' => true,
-                        'roles' => [User::ROLE_ADMIN, User::ROLE_HEAD]
+                        'roles' => [User::ROLE_ADMIN, User::ROLE_HEAD, User::ROLE_STAFF]
                     ],
                 ]
             ],
