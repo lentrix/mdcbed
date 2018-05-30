@@ -48,6 +48,7 @@ class SeedController extends Controller
 			$teacher->firstName = $d['fname'];
 			$teacher->phone = $d['phone'];
 			$teacher->specialization=$d['specialization'];
+			$teacher->userId = $teacherUser->id;
 			$teacher->save();
 
 		}
