@@ -196,7 +196,7 @@ class SeedController extends Controller
 
 	public function actionAll() {
 		$this->actionLevels();
-		// $this->actionUsersAndTeachers();
+		$this->actionUsersAndTeachers();
 		$this->actionStudents();
 		$this->actionDepartments();
 		$this->actionVenues();
