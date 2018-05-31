@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use app\components\ModalConfirmation;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Level */
@@ -37,5 +38,23 @@ $this->params['breadcrumbs'][] = $model->shortName;
     </div>
     <div class="col-md-7">
         <h2 style="margin-top: -34px; border-bottom: 1px solid #ccc"><?= $model->shortName ?> Students</h2>
+        <table class="table table-bordered table-hover table-condensed">
+            <tr>
+                <th>#</th>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Middle Name</th>
+            </tr>
+            
+        <?php foreach($model->currentEnrols as $index=>$enrol): ?>
+            <tr class="clickable" value="<?= Url::toRoute(['/students/view','id'=>$enrol->student->id]);?>">
+                <td><?= $index+1 ?>.</td>
+                <td><?= $enrol->student->lastName;?></td>
+                <td><?= $enrol->student->firstName; ?></td>
+                <td><?= $enrol->student->middleName; ?></td>
+            </tr>
+        <?php endforeach; ?>
+            
+        </table>
     </div>
 </div>

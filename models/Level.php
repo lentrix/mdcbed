@@ -57,4 +57,12 @@ class Level extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Enrol::className(), ['levelId' => 'id']);
     }
+
+    public function getCurrentEnrols() {
+        return Enrol::find()->joinWith('period')->joinWith('student')
+            ->where(['period.active'=>1])
+            ->andFilterWhere(['levelId'=>$this->id])
+            ->orderBy('student.lastName, student.firstName')
+            ->all();
+    }
 }

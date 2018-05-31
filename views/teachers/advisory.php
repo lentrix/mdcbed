@@ -1,4 +1,5 @@
 <?php
+use yii\helpers\Url;
 
 $this->title="My Advisory Class";
 
@@ -20,6 +21,7 @@ $user = Yii::$app->user->identity;
 </div>
 <?php endif; ?>
 
+<?php if($advisory = $user->teacher->advisory): ?>
 
 <div class="row">
 
@@ -37,4 +39,25 @@ $user = Yii::$app->user->identity;
         </table>
     </div>
 
+    <div class="col-md-8">
+        <table class="table table-condensed table-bordered table-hover">
+            <tr>
+                <th>#</th>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Middle Name</th>
+            </tr>
+        <?php foreach($user->teacher->advisory->studentEnrols as $index=>$enrol): ?>
+            <tr class="clickable" value="<?= Url::toRoute(['/students/view','id'=>$enrol->student->id]) ?>">
+                <td><?= $index+1 ?>.</td>
+                <td><?= $enrol->student->lastName ?></td>
+                <td><?= $enrol->student->firstName ?></td>
+                <td><?= $enrol->student->middleName ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </table>
+    </div>
+
 </div>
+
+<?php endif; ?>
