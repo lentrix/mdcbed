@@ -5,6 +5,7 @@ use yii\widgets\DetailView;
 use app\components\ModalConfirmation;
 use yii\bootstrap\Modal;
 use app\models\User;
+use app\models\Period;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
@@ -23,38 +24,18 @@ Modal::begin([
     'header' => '<h3>Add Class</h3>',
     'id' => 'modal-add-class',
 ]); 
-//echo $this->render('/classes/_form', ['model'=>$class,'route'=>Url::toRoute(['/classes/create'])]);
+
 echo "<div id='modal-add-content'></div>";
 Modal::end(); 
 
-Modal::begin([
-    'header' => '<h3>Update Class</h3>',
-    'id' => 'modal-update',
-]);
-echo "<div id='modal-update-content'></div>";
-Modal::end();
-
-$js = <<< JS
-$(document).ready(function(){
-    $('.modal-update-button').click(function(){
-        $('#modal-update').modal('show')
-            .find('#modal-update-content')
-            .load($(this).attr('value'));
-    });
-    $('#modal-create-button').click(function(){
-        $('#modal-add-class').modal('show')
-            .find('#modal-add-content')
-            .load($(this).attr('value'));
-    });
-});
-JS;
-
-$this->registerJS($js);
 ?>
 
+<?php if($user->role < User::ROLE_TEACHER && $model->period->phase == Period::PHASE_ENROLMENT): ?>
 <p class="pull-right">
     <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
 </p>
+<?php endif; ?>
+
 <div class="row">
 
     <div class="col-md-4">
@@ -102,12 +83,14 @@ $this->registerJS($js);
             </div>
 
             <div class="tab-pane fade <?= $activeTab=='schedule'?'active in':'' ?>" id="schedule">
+                <?php if($user->role < User::ROLE_TEACHER && $model->period->phase == Period::PHASE_ENROLMENT): ?>
                 <span class="pull-right">
                     <?= Html::a('<i class="glyphicon glyphicon-plus"></i>', 
                         ['/classes/create','sectionId'=>$model->id],
                         ['class'=>'btn btn-primary', 'title'=>'Add class']
                     ) ?>
                 </span>
+                <?php endif; ?>
                 <?= $this->render('_schedule', compact('model')) ?>
             </div>
         </div>

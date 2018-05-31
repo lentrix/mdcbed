@@ -12,6 +12,7 @@ use yii\filters\AccessControl;
 use app\components\AccessRule;
 use app\models\User;
 use app\models\Classes;
+use app\models\Period;
 
 /**
  * SectionsController implements the CRUD actions for Section model.
@@ -58,13 +59,14 @@ class SectionsController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new SectionSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        $sections = Section::find()
+            ->joinWith('period')
+            ->joinWith('level')
+            ->joinWith('venue')
+            ->joinWith('teacher')
+            ->andFilterWhere(['period.active'=>1])
+            ->all();
+        return $this->render('index', compact('sections'));
     }
 
     /**
@@ -139,6 +141,21 @@ class SectionsController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionArchives($periodId=null)
+    {
+        $periods = Period::find()->orderBy('start DESC')->all();
+        $sections = null;
+        if($periodId) {
+            $sections = Section::find()
+                ->joinWith('venue')
+                ->joinWith('level')
+                ->joinWith('teacher')
+                ->where(['periodId'=>$periodId])
+                ->all();
+        }
+        return $this->render('archives',compact('sections','periods'));
     }
 
     /**
