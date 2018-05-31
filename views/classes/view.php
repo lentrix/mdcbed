@@ -6,6 +6,7 @@ use yii\widgets\DetailView;
 
 use app\models\User;
 use app\components\TimeCheck;
+use app\components\ModalConfirmation;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Classes */
@@ -15,18 +16,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Classes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="classes-view">
-    <?php if(Yii::$app->user->identity->role < User::ROLE_TEACHER): ?>
-    <p class="pull-right">
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-    <?php endif; ?>
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -45,6 +34,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['label'=>'Teacher','attribute'=>'teacher.fullName'],
                 ],
             ]) ?>
+
+            <?php if(Yii::$app->user->identity->role < User::ROLE_TEACHER): ?>
+            <p class="pull-right">
+                <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                <?php ModalConfirmation::confirm('delete-class', "Are you sure you want to delete this class?", 
+                    "<h2>Delete Class</h2>", ['/classes/delete','id'=>$model->id],
+                    ['label'=>'Delete','class'=>'btn btn-danger']); ?>
+            </p>
+            <?php endif; ?>
         </div>
         <div class="col-md-7">
             <h2>Class List</h2>

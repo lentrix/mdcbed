@@ -30,16 +30,12 @@ Modal::end();
 
 ?>
 
-<?php if($user->role < User::ROLE_TEACHER && $model->period->phase == Period::PHASE_ENROLMENT): ?>
-<p class="pull-right">
-    <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-</p>
-<?php endif; ?>
+
+<h1><?= Html::encode($this->title) ?></h1>
 
 <div class="row">
 
     <div class="col-md-4">
-        <h1><?= Html::encode($this->title) ?></h1>
 
         <?= DetailView::widget([
             'model' => $model,
@@ -53,6 +49,12 @@ Modal::end();
                 ['label'=>'Home Room', 'attribute'=>'venue.name'],
             ],
         ]) ?>
+        <?php if($user->role < User::ROLE_TEACHER && $model->period->phase == Period::PHASE_ENROLMENT): ?>
+        <p>
+            <?= Html::a('<i class="glyphicon glyphicon-edit"></i> Update', 
+                ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        </p>
+        <?php endif; ?>
     </div>
     <?php $activeTab = isset($_GET['tab']) ? $_GET['tab'] : 'students' ?>
     <div class="col-md-8">
