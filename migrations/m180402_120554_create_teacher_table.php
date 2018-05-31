@@ -16,7 +16,7 @@ class m180402_120554_create_teacher_table extends Migration
             'id' => $this->primaryKey(),
             'lastName' => $this->string(90)->notNull(),
             'firstName' => $this->string(90)->notNull(),
-            'phone' => $this->string(11),
+            'phone' => $this->string(15),
             'specialization' => $this->string(90),
             'userId' => $this->integer(),
             'active' => $this->boolean()->defaultValue(1),

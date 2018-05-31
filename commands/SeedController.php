@@ -24,7 +24,7 @@ class SeedController extends Controller
 		
 		$data = [
 			['username'=>'lentrix','fullName'=>'Benjie B. Lenteria', 'role'=>User::ROLE_ADMIN, 
-				'lname'=>'Lenteria', 'fname'=>'Benjie','phone'=>'0917.303.5716', 'specialization'=>'Information Technology'],
+				'lname'=>'Lenteria', 'fname'=>'Benjie','phone'=>'09173035716', 'specialization'=>'Information Technology'],
 			['username'=>'teacher1','fullName'=>'Sample Teacher 1', 'role'=>User::ROLE_TEACHER, 
 				'lname'=>'Teacher', 'fname'=>'Sample1','phone'=>'1234567', 'specialization'=>'Mathematics'],
 			['username'=>'head1','fullName'=>'Sample Head 1', 'role'=>User::ROLE_HEAD, 
@@ -58,19 +58,27 @@ class SeedController extends Controller
 		echo "Seeding students...\n";
 
 		$studentsData = [
-			['Doe','John','m','1988-11-02'],
-			['dela Cruz', 'Juan','m','1990-02-24'],
-			['Reyes','Cristela','f', '1991-04-08'],
-			['Hamilton', 'Kevin Von','m', '1993-09-22'],
-			['Buenafe','Marife','f','1989-02-02']
+			['Doe','John','Smith','Pooc Occidental','Tubigon','Bohol', 'm','1988-11-02'],
+			['dela Cruz', 'Juan','Tamad','Tinangnan','Tubigon','Bohol', 'm','1990-02-24'],
+			['Reyes','Cristela','Jimenez', 'Ubojan','Inabanga', 'Bohol', 'f', '1991-04-08'],
+			['Hamilton', 'Kevin Von','Lopez','Canamaya','Sagbayan','Bohol', 'm', '1993-09-22'],
+			['Buenafe','Marife','Manisid','Cantomocad','Loon','Bohol', 'f','1989-02-02'],
+			['Perez','Virgie','Mendez','Bonbon','Clarin','Bohol','f','1991-02-28'],
+			['Melencion','Jonasita','Benavidez','Poblacion','Inabanga','Bohol','m', '1993-06-12'],
+			['Udtohan','Marlon','Ramo','Buangan','Clarin','Bohol','m','1993-09-21'],
+			['Yu','Ynochi','Tan','Bentig','Calape','Bohol','f','1992-10-22']
 		];
 
 		foreach($studentsData as $studentData) {
 			$st = new Student;
 			$st->lastName = $studentData[0];
 			$st->firstName = $studentData[1];
-			$st->gender = $studentData[2];
-			$st->birthDate = $studentData[3];
+			$st->middleName = $studentData[2];
+			$st->barangay = $studentData[3];
+			$st->town = $studentData[4];
+			$st->province = $studentData[5];
+			$st->gender = $studentData[6];
+			$st->birthDate = $studentData[7];
 			$st->save();
 		}
 	}
@@ -79,6 +87,8 @@ class SeedController extends Controller
 	{
 		echo "Seeding departments...\n";
 		$depts = [
+			['Pre', 'Pre-Elementary'],
+			['Elem', 'Elementary'],
 			['SHS','Senior High School'],
 			['JHS','Junior High School']
 		];
@@ -165,6 +175,9 @@ class SeedController extends Controller
     {
     	echo "Seeding periods...\n";
     	$data = [
+    		['SY1718','School Year 2017-2018', '2017-06-13','2018-03-23',0,false],
+    		['2T1718', '2nd Semester AY 2017-2018', '2017-11-05','2018-03-23',1,false],
+    		['3T18','Summer 2018','2018-04-09','2018-05-23',1,false],
     		['SY1819', 'School Year 2018-2019','2018-06-18','2019-03-23',0,true],
     		['1T1819', '1st Semester AY 2018-2019', '2018-06-18','2018-10-23',1,true]
     	];
@@ -183,7 +196,7 @@ class SeedController extends Controller
 
 	public function actionAll() {
 		$this->actionLevels();
-		$this->actionUsersAndTeachers();
+		// $this->actionUsersAndTeachers();
 		$this->actionStudents();
 		$this->actionDepartments();
 		$this->actionVenues();
