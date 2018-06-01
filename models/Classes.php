@@ -99,6 +99,10 @@ class Classes extends \yii\db\ActiveRecord
         return $this->start . '-' . $this->end . ' ' . $this->day;
     }
 
+    public function getCount() {
+        
+    }
+
     public function teacherAvailable($attribute, $params){
         if(!$this->hasErrors()) {
             $tempId = $this->id ? $this->id : -1;
