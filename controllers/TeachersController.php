@@ -16,6 +16,8 @@ use yii\web\UploadedFile;
 
 use app\models\User;
 use app\models\Department;
+use app\models\Student;
+use app\models\Enrol;
 
 /**
  * TeachersController implements the CRUD actions for Teacher model.
@@ -57,7 +59,7 @@ class TeachersController extends Controller
     }
 
     /**
-     * Lists all Teacher models.
+     * Lists all Teacher models.St. Elmo
      * @return mixed
      */
     public function actionIndex()
@@ -152,6 +154,26 @@ class TeachersController extends Controller
     public function actionAdvisory()
     {
         return $this->render('advisory');
+    }
+
+    public function actionAddNewStudent() {
+        
+        $student = new Student;
+
+        if($student->load(Yii::$app->request->post()) && $student->save()) {
+
+            $advisory = Yii::$app->user->identity->teacher->advisory;
+            $enrol = new Enrol;
+            $enrol->studentId = $student->id;
+            $enrol->levelId = $advisory->levelId;
+            $enrol->periodId = $advisory->periodId;
+            $enrol->sectionId = $advisory->id;
+            $enrol->save();
+
+            return $this->redirect(['/teachers/advisory']);
+        }
+
+        return $this->render('add-new-student', compact('student'));
     }
 
     /**

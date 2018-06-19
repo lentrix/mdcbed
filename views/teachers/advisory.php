@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Url;
+use yii\helpers\Html;
 
 $this->title="My Advisory Class";
 
@@ -8,7 +9,7 @@ $this->params['breadcrumbs'][] = 'My Advisory';
 $user = Yii::$app->user->identity;
 
 ?>
-<h1><?= $this->title; ?></h1>
+
 <?php if($user->teacher==null): ?>
 <div class="alert alert-warning">
     <span class="large-text"><i class="glyphicon glyphicon-ban-circle"></i> You do not have teacher account. <?php return; ?></span>
@@ -22,6 +23,11 @@ $user = Yii::$app->user->identity;
 <?php endif; ?>
 
 <?php if($advisory = $user->teacher->advisory): ?>
+
+<h1>
+    <?= $this->title; ?>
+    <?= Html::a('<i class="glyphicon glyphicon-plus"></i> Add New Student',['/teachers/add-new-student'],['class'=>'btn btn-primary pull-right']); ?>
+</h1>
 
 <div class="row">
 
